@@ -306,7 +306,6 @@ const featureSections = [
 ];
 
 const highlightCards = [
-  { title: "Introducing Siri AI.", description: "Powered by Apple Intelligence, Siri AI is your conversational assistant with entirely new capabilities.", image: "highlights_siri_endframe__bd109g1f3l4y_large.jpg", alt: "The Siri AI orb" },
   { title: "Siri AI in your apps.", description: "A more personal assistant that understands context and helps you get things done.", image: "siri_conversations__cb4puu6g56uq_large.jpg", alt: "A conversational request to Siri AI" },
   { title: "Apple Intelligence in apps.", description: "Helpful new capabilities in the apps you use every day.", image: "features__lts2awuq62i6_large.jpg", alt: "Apple Intelligence in Messages" },
   { title: "Visual Intelligence.", description: "Search and take action based on what you see around you.", image: "visual_intelligence__f0ybhtxs0pea_large.jpg", alt: "Visual Intelligence on Mac" },
@@ -714,7 +713,7 @@ function AppleIntelligencePage() {
             </div>
             <FeatureRail
               id="highlights"
-              cards={highlightCards.slice(1)}
+              cards={highlightCards}
               anchorIds={highlightItems.slice(1).map((item) => item.target)}
               registerTrack={registerTrack}
               active={activeRail.highlights ?? 0}
