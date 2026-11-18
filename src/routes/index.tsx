@@ -431,6 +431,7 @@ function AppleIntelligencePage() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const siteHeaderRef = useRef<HTMLElement>(null);
   const desktopMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const railRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
@@ -451,6 +452,15 @@ function AppleIntelligencePage() {
       ) {
         setActiveMenu(null);
       }
+      if (
+        mobileMenuOpen &&
+        mobileMenuRef.current &&
+        event.target instanceof Node &&
+        !mobileMenuRef.current.contains(event.target) &&
+        !menuButtonRef.current?.contains(event.target)
+      ) {
+        setMobileMenuOpen(false);
+      }
     };
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("pointerdown", onPointerDown);
@@ -459,6 +469,20 @@ function AppleIntelligencePage() {
       document.removeEventListener("pointerdown", onPointerDown);
     };
   }, [activeMenu, mobileMenuOpen]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const syncMotionPreference = () => {
+      if (media.matches && video) {
+        video.pause();
+        setIsVideoPlaying(false);
+      }
+    };
+    syncMotionPreference();
+    media.addEventListener("change", syncMotionPreference);
+    return () => media.removeEventListener("change", syncMotionPreference);
+  }, []);
 
   const registerTrack = (id: string, node: HTMLDivElement | null) => {
     railRefs.current[id] = node;
@@ -504,7 +528,7 @@ function AppleIntelligencePage() {
   return (
     <div className="apple-page">
       <a className="apple-skip-link" href="#main-content">Skip to content</a>
-      <header className="apple-site-header" ref={siteHeaderRef}>
+      <header className={`apple-site-header${mobileMenuOpen ? " is-mobile-menu-open" : ""}`} ref={siteHeaderRef}>
         <nav className="apple-global-nav" aria-label="Apple">
           <a className="apple-wordmark" href="/in/" aria-label="Apple home">Apple</a>
           <div className="apple-desktop-links">
@@ -602,7 +626,7 @@ function AppleIntelligencePage() {
           </form>
         )}
         {mobileMenuOpen && (
-          <div className="apple-mobile-menu" id="apple-mobile-menu">
+          <div className="apple-mobile-menu" id="apple-mobile-menu" ref={mobileMenuRef}>
             <div className="apple-mobile-menu-search">
               <Search aria-hidden="true" />
               <span>Search apple.com</span>
@@ -837,16 +861,16 @@ function AppleIntelligencePage() {
         <div className="apple-wide-wrap">
           <p>Apple Intelligence is available in English. Feature availability and capabilities may vary by language, region and device. Usage limits may apply.</p>
           <div className="apple-footnote-list">
-            <a id="footnote-1" href="#overview">1. Apple Intelligence features are available on supported devices.</a>
-            <a id="footnote-2" href="#communication">2. Messages features are available on supported devices.</a>
-            <a id="footnote-3" href="#visual-intelligence">3. Visual Intelligence requires a supported device.</a>
-            <a id="footnote-4" href="#siri-ai">4. Voice customisation options may vary.</a>
-            <a id="footnote-5" href="#siri-ai">5. CarPlay features vary by vehicle and region.</a>
-            <a id="footnote-6" href="#productivity">6. Dictation availability varies by language.</a>
-            <a id="footnote-7" href="#siri-ai">7. Home features require compatible accessories.</a>
-            <a id="footnote-8" href="#siri-ai">8. HomeKit Secure Video requires a supported plan.</a>
-            <a id="footnote-9" href="#siri-ai">9. Availability varies by device and region.</a>
-            <a id="footnote-10" href="#siri-ai">10. Workout Buddy is available in supported languages.</a>
+            <a id="footnote-1" href="#overview">1. Apple Intelligence is available with Siri and device language set to a supported language. Feature availability varies by region, language and device. Siri AI is available in beta on supported operating systems. Daily usage limits may apply to certain features.</a>
+            <a id="footnote-2" href="#communication">2. Suggestions in Messages conversations are coming in a future software update.</a>
+            <a id="footnote-3" href="#visual-intelligence">3. Available on compatible iPhone, iPad and Mac models with device language set to a supported English variant.</a>
+            <a id="footnote-4" href="#siri-ai">4. Available on iPhone 18 Pro, iPhone 18 Pro Max, iPhone Duo, iPhone 17 Pro, iPhone 17 Pro Max, iPhone Air, supported iPad models and supported Mac models.</a>
+            <a id="footnote-5" href="#siri-ai">5. CarPlay support is either standard or available as an option on many new 2016 cars and later. Support varies by vehicle and region.</a>
+            <a id="footnote-6" href="#productivity">6. Dictation availability varies by language and supported device.</a>
+            <a id="footnote-7" href="#siri-ai">7. Requires an Apple Intelligence-enabled iPhone or iPad and a home hub such as HomePod or Apple TV 4K with the latest software.</a>
+            <a id="footnote-8" href="#siri-ai">8. Requires a home hub, an Apple Intelligence-enabled iPhone and an eligible iCloud+ plan.</a>
+            <a id="footnote-9" href="#siri-ai">9. Natural-language search requires an Apple Intelligence-enabled device and compatible HomeKit Secure Video setup.</a>
+            <a id="footnote-10" href="#siri-ai">10. Requires a paired Apple Intelligence-enabled iPhone and Bluetooth headphones, with device and Siri language set to English or Spanish.</a>
           </div>
           <div className="apple-footer-bottom">
             <a href="/in/">Apple</a>
