@@ -82,7 +82,6 @@ const menuItemHrefs: Record<string, string> = {
   "Watch Bands": "/in/shop/goto/watch/bands",
   "Apple Watch Support": appleSupportUrl("watch"),
   watchOS: "/in/os/watchos/",
-  "Apple Fitness+": "/in/apple-fitness-plus/",
   "Explore All AirPods": "/in/airpods/",
   "AirPods Pro": "/in/airpods-pro/",
   AirPods: "/in/airpods/",
@@ -458,7 +457,7 @@ function AppleIntelligencePage() {
       if (event.key === "Escape") {
         setActiveMenu(null);
         setMobileMenuOpen(false);
-        (activeMenuTriggerRef.current ?? menuButtonRef.current)?.focus();
+        (activeNavTriggerRef.current ?? menuButtonRef.current)?.focus();
       }
     };
     const onPointerDown = (event: PointerEvent) => {
@@ -738,7 +737,7 @@ function AppleIntelligencePage() {
               cards={highlightCards}
               anchorIds={highlightItems.slice(1).map((item) => item.target)}
               registerTrack={registerTrack}
-              active={activeRail.highlights ?? 0}
+              active={activeRail["highlights"] ?? 0}
               onScroll={updateRailPosition}
               onMove={moveRail}
             />
