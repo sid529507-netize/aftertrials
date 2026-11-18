@@ -522,11 +522,20 @@ function AppleIntelligencePage() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.08, rootMargin: "0px 0px -24px 0px" },
+      { threshold: 0.04, rootMargin: "180px 0px 180px 0px" },
     );
+
+    const directionalTargets = ".apple-feature-card, .apple-more-item, .apple-product-card, .apple-compatible-column";
+    const zoomTargets = ".apple-feature-card > img, .apple-hero-art img, .apple-product-image-link img";
+    let directionIndex = 0;
 
     revealTargets.forEach((target) => {
       target.classList.add("apple-scroll-reveal");
+      if (target.matches(zoomTargets)) target.classList.add("apple-scroll-zoom");
+      if (target.matches(directionalTargets)) {
+        target.classList.add(directionIndex % 2 === 0 ? "apple-scroll-reveal--left" : "apple-scroll-reveal--right");
+        directionIndex += 1;
+      }
       observer.observe(target);
     });
 
