@@ -81,11 +81,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Apple Intelligence and Siri — Apple (IN)" },
+      {
+        name: "description",
+        content: "Meet Apple Intelligence and the next generation of Siri, featuring personal intelligence and privacy.",
+      },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Apple Intelligence and Siri — Apple (IN)" },
+      {
+        property: "og:description",
+        content: "Meet Apple Intelligence and the next generation of Siri, featuring personal intelligence and privacy.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },

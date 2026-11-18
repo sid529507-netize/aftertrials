@@ -61,16 +61,12 @@
 }
 
 .apple-wordmark {
-  width: 23px;
-  min-width: 23px;
-  overflow: hidden;
-  font-size: 0;
-}
-
-.apple-wordmark::before {
-  content: "●";
-  font-size: 22px;
-  line-height: 1;
+  width: 42px;
+  min-width: 42px;
+  color: var(--apple-ink);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .apple-desktop-links {
@@ -220,6 +216,11 @@
 
 .apple-mobile-menu {
   display: none;
+}
+
+.apple-page .apple-nav-icon:hover,
+.apple-page .apple-mobile-menu-button:hover {
+  background: color-mix(in oklab, var(--apple-ink) 7%, transparent);
 }
 
 .apple-product-nav {
