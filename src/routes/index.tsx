@@ -366,7 +366,6 @@ const products: Record<ProductCategory, { name: string; description: string; ima
     { name: "iMac", description: "An all-in-one desktop for creativity and productivity.", image: "imac__f937rgcno5ym_large.jpg", href: "/in/imac/", buy: "/in/shop/goto/buy_mac/imac", chip: "M1 and later" },
     { name: "Mac mini", description: "The mini-est, most affordable Mac desktop.", image: "mac_mini__ehfboc6zrvyq_large.jpg", href: "/in/mac-mini/", buy: "/in/shop/goto/buy_mac/mac_mini", chip: "M1 and later" },
     { name: "Mac Studio", description: "Powerful performance and connectivity for pros.", image: "mac_studio__bsbp6frrj1zm_large.jpg", href: "/in/mac-studio/", buy: "/in/shop/goto/buy_mac/mac_studio", chip: "M1 Max and later" },
-    { name: "Mac Pro", description: "A workstation built for demanding creative and professional workflows.", image: "mac_studio__bsbp6frrj1zm_large.jpg", href: "/in/mac-pro/", buy: "/in/shop/goto/buy_mac/mac_pro", chip: "M2 Ultra" },
   ],
 };
 
