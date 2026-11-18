@@ -1161,21 +1161,37 @@
 
 .apple-footer-bottom > span:nth-of-type(2) { width: 100%; margin: 0; order: 2; }
 
-@media (min-width: 520px) and (max-width: 760px) {
-  .apple-feature-card { width: min(48vw, 320px); min-width: min(48vw, 320px); }
-  .apple-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .apple-product-image-link { height: 190px; }
-  .apple-product-info { padding: 16px; }
-  .apple-compatible-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 18px; }
-}
+.apple-feature-card { width: min(48vw, 320px); min-width: min(48vw, 320px); }
 
-@media (max-width: 360px) {
-  .apple-hero h1 { font-size: 29px; }
-  .apple-hero-art { height: 330px; }
-  .apple-hero-side { width: 74px; height: 92px; }
-  .apple-hero-panel { width: 112px; height: 126px; }
-  .apple-hero-screen { width: 140px; height: 303px; }
-  .apple-more-grid { grid-template-columns: minmax(0, 1fr); }
+.apple-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+.apple-product-image-link { height: 190px; }
+
+.apple-product-info { padding: 16px; }
+
+.apple-compatible-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 18px; }
+
+.apple-hero h1 { font-size: 29px; }
+
+.apple-hero-art { height: 330px; }
+
+.apple-hero-side { width: 74px; height: 92px; }
+
+.apple-hero-panel { width: 112px; height: 126px; }
+
+.apple-hero-screen { width: 140px; height: 303px; }
+
+.apple-more-grid { grid-template-columns: minmax(0, 1fr); }
+
+/* Phone artwork: keep the screen within its bezel. */
+
+.apple-page .apple-hero-screen { z-index: 4; width: 156px; height: 338px; }
+
+.apple-page .apple-hero-device { z-index: 3; width: 170px; height: 350px; }
+
+@media (min-width: 761px) {
+  .apple-page .apple-hero-screen { width: 194px; height: 420px; }
+  .apple-page .apple-hero-device { width: 212px; height: 434px; }
 }
 
 @media (min-width: 761px) {.apple-page {
