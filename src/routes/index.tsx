@@ -447,8 +447,8 @@ function AppleIntelligencePage() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const activeNavTriggerRef = useRef<HTMLButtonElement>(null);
   const siteHeaderRef = useRef<HTMLElement>(null);
-  const desktopMenuRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const railRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -458,7 +458,7 @@ function AppleIntelligencePage() {
       if (event.key === "Escape") {
         setActiveMenu(null);
         setMobileMenuOpen(false);
-        menuButtonRef.current?.focus();
+        (activeMenuTriggerRef.current ?? menuButtonRef.current)?.focus();
       }
     };
     const onPointerDown = (event: PointerEvent) => {
@@ -557,7 +557,10 @@ function AppleIntelligencePage() {
                 aria-expanded={activeMenu === link.name}
                 aria-controls="apple-mega-menu"
                 onClick={() => setActiveMenu((current) => current === link.name ? null : link.name)}
-                onMouseEnter={() => setActiveMenu(link.name)}
+                onMouseEnter={(event) => {
+                  activeNavTriggerRef.current = event.currentTarget;
+                  setActiveMenu(link.name);
+                }}
               >
                 {link.name}
               </button>
@@ -597,7 +600,7 @@ function AppleIntelligencePage() {
           </div>
         </nav>
         {activeMenu && (
-          <div className="apple-mega-menu" id="apple-mega-menu" ref={desktopMenuRef}>
+          <div className="apple-mega-menu" id="apple-mega-menu">
             <div className="apple-mega-inner">
               {(menuCollections[activeMenu] ?? []).map((collection) => (
                 <div className="apple-mega-column" key={collection.title}>
