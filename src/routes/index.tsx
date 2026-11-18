@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   ArrowRight,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Menu,
@@ -16,6 +15,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import "@/styles/pages/apple-intelligence.css";
 
 const asset = (file: string) => `/site-assets/apple-intelligence/${file}`;
 
@@ -271,6 +271,7 @@ const compatibleDevices = [
 function FeatureRail({
   id,
   cards,
+  anchorIds,
   registerTrack,
   active,
   onScroll,
@@ -278,6 +279,7 @@ function FeatureRail({
 }: {
   id: string;
   cards: { title: string; description: string; image: string; alt: string }[];
+  anchorIds?: string[];
   registerTrack: (id: string, node: HTMLDivElement | null) => void;
   active: number;
   onScroll: (id: string, node: HTMLDivElement) => void;
@@ -292,7 +294,7 @@ function FeatureRail({
         aria-label={`${id.replaceAll("-", " ")} gallery`}
       >
         {cards.map((card, index) => (
-          <article className="apple-feature-card" key={`${id}-${card.title}`}>
+          <article className="apple-feature-card" id={anchorIds?.[index]} key={`${id}-${card.title}`}>
             <img src={asset(card.image)} alt={card.alt} loading={index > 1 ? "lazy" : "eager"} />
             <div className="apple-card-copy">
               <h3>{card.title}</h3>
@@ -331,6 +333,8 @@ function FeatureRail({
 function AppleIntelligencePage() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [activeRail, setActiveRail] = useState<Record<string, number>>({});
   const [activeProduct, setActiveProduct] = useState<ProductCategory>("iPhone");
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
@@ -409,6 +413,7 @@ function AppleIntelligencePage() {
 
   return (
     <div className="apple-page">
+      <a className="apple-skip-link" href="#main-content">Skip to content</a>
       <header className="apple-site-header">
         <nav className="apple-global-nav" aria-label="Apple">
           <a className="apple-wordmark" href="/in/" aria-label="Apple home">Apple</a>
@@ -427,8 +432,20 @@ function AppleIntelligencePage() {
             ))}
           </div>
           <div className="apple-nav-actions">
-            <Button variant="ghost" size="icon" className="apple-nav-icon" aria-label="Search Apple">
-              <Search />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="apple-nav-icon"
+              aria-label={searchOpen ? "Close search" : "Search Apple"}
+              aria-expanded={searchOpen}
+              aria-controls="apple-search-panel"
+              onClick={() => {
+                setSearchOpen((open) => !open);
+                setActiveMenu(null);
+                setMobileMenuOpen(false);
+              }}
+            >
+              {searchOpen ? <X /> : <Search />}
             </Button>
             <a className="apple-bag-link" href="/in/shop/goto/bag" aria-label="Shopping bag">
               <ShoppingBag aria-hidden="true" />
@@ -468,6 +485,32 @@ function AppleIntelligencePage() {
             </div>
           </div>
         )}
+        {searchOpen && (
+          <form
+            className="apple-search-panel"
+            id="apple-search-panel"
+            action="/in/search"
+            method="get"
+            role="search"
+            onSubmit={() => setSearchOpen(false)}
+          >
+            <Search aria-hidden="true" />
+            <input
+              autoFocus
+              type="search"
+              name="query"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="Search apple.com"
+              aria-label="Search apple.com"
+            />
+            {searchQuery && (
+              <Button variant="ghost" size="icon" className="apple-icon-button" type="button" aria-label="Clear search" onClick={() => setSearchQuery("")}>
+                <X />
+              </Button>
+            )}
+          </form>
+        )}
         {mobileMenuOpen && (
           <div className="apple-mobile-menu" id="apple-mobile-menu">
             <div className="apple-mobile-menu-search">
@@ -494,7 +537,7 @@ function AppleIntelligencePage() {
         </div>
       </nav>
 
-      <main>
+      <main id="main-content">
         <section className="apple-hero" id="overview">
           <div className="apple-hero-copy">
             <p className="apple-eyebrow">Apple Intelligence and Siri</p>
@@ -558,6 +601,7 @@ function AppleIntelligencePage() {
             <FeatureRail
               id="highlights"
               cards={highlightCards.slice(1)}
+              anchorIds={highlightItems.slice(1).map((item) => item.target)}
               registerTrack={registerTrack}
               active={activeRail.highlights ?? 0}
               onScroll={updateRailPosition}
