@@ -147,8 +147,6 @@ export const Route = createFileRoute("/")({
   component: AppleIntelligencePage,
 });
 
-const closeMegaMenu = (activeMenu: string | null) => activeMenu;
-
 const primaryLinks = [
   { name: "Store", href: "/in/shop/goto/store" },
   { name: "Mac", href: "/in/mac/" },
