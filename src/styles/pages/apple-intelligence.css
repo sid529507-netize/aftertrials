@@ -2275,6 +2275,7 @@
 
 @media (min-width: 761px) and (max-width: 1020px) {
   .apple-wide-wrap { width: calc(100% - 48px); }
+  .apple-hero-art { margin-top: 48px; }
   .apple-section-heading { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .apple-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .apple-product-image-link { height: 230px; }
@@ -2286,6 +2287,9 @@
 
 @media (min-width: 1021px) {
   .apple-hero { min-height: min(1040px, calc(100svh - 110px)); }
+  .apple-hero-copy { width: min(100%, 980px); }
+  .apple-hero h1 { max-width: 980px; margin-inline: auto; }
+  .apple-hero-art { margin-top: 56px; }
   .apple-feature-card { width: min(31%, 348px); min-width: min(31%, 348px); }
 }
 
