@@ -22,13 +22,13 @@ const asset = (file: string) => `/site-assets/apple-intelligence/${file}`;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Apple Intelligence and Siri — Apple (IN)" },
+      { title: "Apple Intelligence and Siri" },
       {
         name: "description",
         content:
           "Meet Apple Intelligence and the next generation of Siri. Explore more personal intelligence, powerful creative tools and privacy features.",
       },
-      { property: "og:title", content: "Apple Intelligence and Siri — Apple (IN)" },
+      { property: "og:title", content: "Apple Intelligence and Siri" },
       {
         property: "og:description",
         content:
