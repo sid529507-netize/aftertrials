@@ -506,7 +506,7 @@ function AppleIntelligencePage() {
     if (motionPreference.matches) return;
 
     const revealTargets = document.querySelectorAll<HTMLElement>(
-      ".apple-section-heading, .apple-feature-header, .apple-highlight-feature, .apple-feature-card, .apple-more-item, .apple-privacy-card, .apple-product-card, .apple-compatible-heading, .apple-compatible-column, .apple-developer-card",
+      ".apple-section-heading, .apple-feature-header, .apple-highlight-feature, .apple-feature-card, .apple-feature-card > img, .apple-hero-art img, .apple-more-item, .apple-privacy-card, .apple-product-card, .apple-product-image-link img, .apple-compatible-heading, .apple-compatible-column, .apple-developer-card",
     );
 
     if (!("IntersectionObserver" in window)) {
@@ -522,11 +522,20 @@ function AppleIntelligencePage() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -36px 0px" },
+      { threshold: 0.04, rootMargin: "180px 0px 180px 0px" },
     );
+
+    const directionalTargets = ".apple-feature-card, .apple-more-item, .apple-product-card, .apple-compatible-column";
+    const zoomTargets = ".apple-feature-card > img, .apple-hero-art img, .apple-product-image-link img";
+    let directionIndex = 0;
 
     revealTargets.forEach((target) => {
       target.classList.add("apple-scroll-reveal");
+      if (target.matches(zoomTargets)) target.classList.add("apple-scroll-zoom");
+      if (target.matches(directionalTargets)) {
+        target.classList.add(directionIndex % 2 === 0 ? "apple-scroll-reveal--left" : "apple-scroll-reveal--right");
+        directionIndex += 1;
+      }
       observer.observe(target);
     });
 
