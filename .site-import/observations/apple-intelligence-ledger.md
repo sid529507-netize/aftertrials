@@ -23,3 +23,6 @@ The app is open to the public preview URL, so visual verification is possible wi
 ## Assets
 
 Source image files and the short Siri animation are stored under `public/site-assets/apple-intelligence/`. The original-to-local image and video paths are mapped in `assets.json`. All 62 unique source image URLs were retrieved; two different Apple images shared the filename `visual_intelligence__f0ybhtxs0pea_large.jpg`, so the second image uses `visual_intelligence_gallery__f0ybhtxs0pea_large.jpg` locally.
+## Preview review update
+
+Not yet completed. The capture service did not import the page automatically; the manual page and local artwork have been added, and preview checks are pending the next generated build state.
