@@ -22,6 +22,11 @@ const appleSupportUrl = (product: string) =>
   `https://support.apple.com/en-in/${product}?cid=gn-ols-${product}-psp-prodfly`;
 
 const menuItemHrefs: Record<string, string> = {
+  "Shop the latest": "/in/shop/goto/store",
+  Watch: "/in/watch/",
+  "Find a Store": "/in/retail/",
+  "Order Status": "/in/shop/goto/order/list",
+  "Trade In": "/in/shop/goto/trade_in",
   "Explore All Mac": "/in/mac/",
   "MacBook Neo": "/in/macbook-neo/",
   "MacBook Air": "/in/macbook-air/",
@@ -29,6 +34,8 @@ const menuItemHrefs: Record<string, string> = {
   "iMac": "/in/imac/",
   "Mac mini": "/in/mac-mini/",
   "Mac Studio": "/in/mac-studio/",
+  "Compare Apple Watch": "/in/watch/compare/",
+  "AirPods Max": "/in/airpods-max/",
   Displays: "/in/displays/",
   "Compare Mac": "/in/mac/compare/",
   "Switch from PC to Mac": "/in/mac/mac-does-that/",
@@ -94,9 +101,16 @@ const menuItemHrefs: Record<string, string> = {
   "Apple TV+": "/in/apple-tv-plus/",
   "Apple Music": "/in/apple-music/",
   "Apple Arcade": "/in/apple-arcade/",
+  "Apple Fitness+": "/in/apple-fitness-plus/",
+  "Apple Podcasts": "/in/apple-podcasts/",
+  "Apple Books": "/in/apple-books/",
+  "App Store": "/in/app-store/",
   "Apple TV+ Support": appleSupportUrl("tv"),
   "Apple Music Support": appleSupportUrl("music"),
   "Apple Arcade Support": appleSupportUrl("arcade"),
+  "Apple Fitness+ Support": appleSupportUrl("fitnessplus"),
+  "TV & Home": "/in/shop/goto/buy_home",
+  "New Arrivals": "/in/shop/goto/store",
   "Shop All Accessories": "/in/shop/goto/buy_accessories",
   "Made by Apple": "/in/shop/goto/apple_accessories",
   Beats: "/in/beats/",
@@ -104,6 +118,10 @@ const menuItemHrefs: Record<string, string> = {
   "Explore Support": "/in/support/",
   "Helpful Topics": "/in/support/",
   "Apple Support": "/in/support/",
+  "AppleCare+": "/in/applecare/",
+  "Billing and subscriptions": "/in/support/billing/",
+  Accessibility: "/in/accessibility/",
+  "Apple Support app": "/in/support/app/",
   "Repair": "/in/support/repair/",
   "Contact Apple Support": "/in/support/contact/",
 };
@@ -145,11 +163,11 @@ const primaryLinks = [
 
 const menuCollections: Record<string, { title: string; items: string[] }[]> = {
   Store: [
-    { title: "Shop", items: ["Shop the latest", "Mac", "iPad", "iPhone", "Apple Watch", "Accessories"] },
-    { title: "Quick Links", items: ["Find a Store", "Order Status", "Ways to Buy", "Trade in"] },
+    { title: "Shop", items: ["Shop the latest", "Mac", "iPad", "iPhone", "Watch", "AirPods", "Accessories"] },
+    { title: "Quick Links", items: ["Find a Store", "Order Status", "Ways to Buy", "Trade In"] },
   ],
   Mac: [
-    { title: "Explore Mac", items: ["Explore All Mac", "MacBook Neo", "MacBook Air", "MacBook Pro", "iMac", "Mac mini", "Mac Studio", "Displays"] },
+    { title: "Explore Mac", items: ["Explore All Mac", "MacBook Neo", "MacBook Air", "MacBook Pro", "iMac", "Mac mini", "Mac Studio", "Displays", "Compare Mac", "Switch from PC to Mac"] },
     { title: "Shop Mac", items: ["Shop Mac", "Mac Accessories", "Ways to Buy", "Personal Setup"] },
     { title: "More from Mac", items: ["Mac Support", "AppleCare", "macOS", "Apple Intelligence and Siri"] },
   ],
@@ -159,35 +177,36 @@ const menuCollections: Record<string, { title: string; items: string[] }[]> = {
     { title: "More from iPad", items: ["iPad Support", "AppleCare", "iPadOS", "Apple Intelligence and Siri"] },
   ],
   iPhone: [
-    { title: "Explore iPhone", items: ["Explore All iPhone", "iPhone Duo", "iPhone 18 Pro", "iPhone Air", "iPhone 17", "Compare iPhone"] },
+    { title: "Explore iPhone", items: ["Explore All iPhone", "iPhone Duo", "iPhone 18 Pro", "iPhone Air", "iPhone 17", "iPhone 17e", "Compare iPhone"] },
     { title: "Shop iPhone", items: ["Shop iPhone", "iPhone Accessories", "Ways to Buy", "Switch from Android"] },
     { title: "More from iPhone", items: ["iPhone Support", "AppleCare", "iOS", "Apple Intelligence and Siri"] },
   ],
   Watch: [
-    { title: "Explore Watch", items: ["Explore All Apple Watch", "Apple Watch Ultra", "Apple Watch Series", "Apple Watch SE"] },
+    { title: "Explore Watch", items: ["Explore All Apple Watch", "Apple Watch Ultra", "Apple Watch Series", "Apple Watch SE", "Compare Apple Watch"] },
     { title: "Shop Watch", items: ["Shop Apple Watch", "Watch Bands", "Ways to Buy"] },
     { title: "More from Watch", items: ["Apple Watch Support", "watchOS", "Apple Fitness+"] },
   ],
   AirPods: [
-    { title: "Explore AirPods", items: ["Explore All AirPods", "AirPods Pro", "AirPods", "Compare AirPods"] },
+    { title: "Explore AirPods", items: ["Explore All AirPods", "AirPods Pro", "AirPods Max", "AirPods", "Compare AirPods"] },
     { title: "Shop AirPods", items: ["Shop AirPods", "AirPods Accessories"] },
     { title: "More from AirPods", items: ["AirPods Support", "Apple Music"] },
   ],
   Home: [
-    { title: "Explore Home", items: ["Explore Home", "HomePod", "Apple TV 4K", "Home app"] },
+    { title: "Explore Home", items: ["Explore Home", "Explore All Home", "HomePod", "Apple TV 4K", "Home app"] },
     { title: "More from Home", items: ["Home Support", "Apple TV app", "Apple Intelligence and Siri"] },
   ],
   Entertainment: [
-    { title: "Explore Entertainment", items: ["Explore All Entertainment", "Apple One", "Apple TV+", "Apple Music", "Apple Arcade"] },
-    { title: "Support", items: ["Apple TV+ Support", "Apple Music Support", "Apple Arcade Support"] },
+    { title: "Explore Entertainment", items: ["Explore All Entertainment", "Apple One", "Apple TV+", "Apple Music", "Apple Arcade", "Apple Fitness+", "Apple Podcasts", "Apple Books", "App Store"] },
+    { title: "Support", items: ["Apple TV+ Support", "Apple Music Support", "Apple Arcade Support", "Apple Fitness+ Support"] },
   ],
   Accessories: [
-    { title: "Shop Accessories", items: ["Shop All Accessories", "Mac", "iPad", "iPhone", "Apple Watch", "AirPods"] },
-    { title: "Explore", items: ["Made by Apple", "Beats", "AirTag"] },
+    { title: "Shop Accessories", items: ["Shop All Accessories", "Mac", "iPad", "iPhone", "Apple Watch", "AirPods", "TV & Home"] },
+    { title: "Explore", items: ["Made by Apple", "Beats", "AirTag", "New Arrivals"] },
   ],
   Support: [
-    { title: "Explore Support", items: ["iPhone Support", "Mac Support", "iPad Support", "Apple Watch Support", "AirPods Support"] },
-    { title: "Helpful Topics", items: ["AppleCare", "Repair", "Contact Apple Support"] },
+    { title: "Explore Support", items: ["iPhone Support", "Mac Support", "iPad Support", "Apple Watch Support", "AirPods Support", "Music Support", "Apple TV Support"] },
+    { title: "Helpful Topics", items: ["AppleCare+", "Repair", "Billing and subscriptions", "Accessibility"] },
+    { title: "Get Support", items: ["Apple Support app", "Contact Apple Support"] },
   ],
 };
 
