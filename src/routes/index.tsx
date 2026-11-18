@@ -501,6 +501,38 @@ function AppleIntelligencePage() {
     return () => media.removeEventListener("change", syncMotionPreference);
   }, []);
 
+  useEffect(() => {
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motionPreference.matches) return;
+
+    const revealTargets = document.querySelectorAll<HTMLElement>(
+      ".apple-section-heading, .apple-feature-header, .apple-highlight-feature, .apple-feature-card, .apple-more-item, .apple-privacy-card, .apple-product-card, .apple-compatible-heading, .apple-compatible-column, .apple-developer-card",
+    );
+
+    if (!("IntersectionObserver" in window)) {
+      revealTargets.forEach((target) => target.classList.add("apple-scroll-reveal--visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("apple-scroll-reveal--visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -36px 0px" },
+    );
+
+    revealTargets.forEach((target) => {
+      target.classList.add("apple-scroll-reveal");
+      observer.observe(target);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const registerTrack = (id: string, node: HTMLDivElement | null) => {
     railRefs.current[id] = node;
   };
