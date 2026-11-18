@@ -18,6 +18,95 @@ import { Button } from "@/components/ui/button";
 import "@/styles/pages/apple-intelligence.css";
 
 const asset = (file: string) => `/site-assets/apple-intelligence/${file}`;
+const appleSupportUrl = (product: string) =>
+  `https://support.apple.com/en-in/${product}?cid=gn-ols-${product}-psp-prodfly`;
+
+const menuItemHrefs: Record<string, string> = {
+  "Explore All Mac": "/in/mac/",
+  "MacBook Neo": "/in/macbook-neo/",
+  "MacBook Air": "/in/macbook-air/",
+  "MacBook Pro": "/in/macbook-pro/",
+  "iMac": "/in/imac/",
+  "Mac mini": "/in/mac-mini/",
+  "Mac Studio": "/in/mac-studio/",
+  Displays: "/in/displays/",
+  "Compare Mac": "/in/mac/compare/",
+  "Switch from PC to Mac": "/in/mac/mac-does-that/",
+  "Shop Mac": "/in/shop/goto/buy_mac",
+  "Mac Accessories": "/in/shop/goto/mac/accessories",
+  "Ways to Buy": "/in/shop/goto/ways_to_buy",
+  "Personal Setup": "/in/shop/goto/personal_setup",
+  "Mac Support": appleSupportUrl("mac"),
+  "AppleCare": "/in/applecare/?filter=mac",
+  macOS: "/in/os/macos/",
+  "Apple Intelligence and Siri": "/in/apple-intelligence/",
+  "Apps by Apple": "/in/apps/",
+  "Apple Creator Studio": "/in/apple-creator-studio/",
+  "Better with iPhone": "/in/macos/continuity/",
+  "iCloud+": "/in/icloud/",
+  "Mac for Business": "/in/business/mac/",
+  Education: "/in/education/",
+  "Apple at Work": "/in/business/",
+  "Explore All iPad": "/in/ipad/",
+  "iPad Pro": "/in/ipad-pro/",
+  "iPad Air": "/in/ipad-air/",
+  "iPad mini": "/in/ipad-mini/",
+  "Compare iPad": "/in/ipad/compare/",
+  "Shop iPad": "/in/shop/goto/buy_ipad",
+  "iPad Accessories": "/in/shop/goto/ipad/accessories",
+  "iPad Support": appleSupportUrl("ipad"),
+  iPadOS: "/in/os/ipados/",
+  "Explore All iPhone": "/in/iphone/",
+  "iPhone Duo": "/in/iphone-duo/",
+  "iPhone 18 Pro": "/in/iphone-18-pro/",
+  "iPhone Air": "/in/iphone-air/",
+  "iPhone 17": "/in/iphone-17/",
+  "Compare iPhone": "/in/iphone/compare/",
+  "Shop iPhone": "/in/shop/goto/buy_iphone",
+  "iPhone Accessories": "/in/shop/goto/iphone/accessories",
+  "Switch from Android": "/in/iphone/switch/",
+  "iPhone Support": appleSupportUrl("iphone"),
+  iOS: "/in/os/ios/",
+  "Explore All Apple Watch": "/in/watch/",
+  "Apple Watch Ultra": "/in/apple-watch-ultra-3/",
+  "Apple Watch Series": "/in/apple-watch-series-11/",
+  "Apple Watch SE": "/in/apple-watch-se-3/",
+  "Shop Apple Watch": "/in/shop/goto/buy_watch",
+  "Watch Bands": "/in/shop/goto/watch/bands",
+  "Apple Watch Support": appleSupportUrl("watch"),
+  watchOS: "/in/os/watchos/",
+  "Apple Fitness+": "/in/apple-fitness-plus/",
+  "Explore All AirPods": "/in/airpods/",
+  "AirPods Pro": "/in/airpods-pro/",
+  AirPods: "/in/airpods/",
+  "Compare AirPods": "/in/airpods/compare/",
+  "Shop AirPods": "/in/shop/goto/buy_airpods",
+  "AirPods Accessories": "/in/shop/goto/airpods/accessories",
+  "AirPods Support": appleSupportUrl("airpods"),
+  "Explore Home": "/in/home/",
+  HomePod: "/in/homepod/",
+  "Apple TV 4K": "/in/apple-tv-4k/",
+  "Home app": "/in/home-app/",
+  "Home Support": appleSupportUrl("homepod"),
+  "Apple TV app": "/in/apple-tv-app/",
+  "Explore All Entertainment": "/in/entertainment/",
+  "Apple One": "/in/apple-one/",
+  "Apple TV+": "/in/apple-tv-plus/",
+  "Apple Music": "/in/apple-music/",
+  "Apple Arcade": "/in/apple-arcade/",
+  "Apple TV+ Support": appleSupportUrl("tv"),
+  "Apple Music Support": appleSupportUrl("music"),
+  "Apple Arcade Support": appleSupportUrl("arcade"),
+  "Shop All Accessories": "/in/shop/goto/buy_accessories",
+  "Made by Apple": "/in/shop/goto/apple_accessories",
+  Beats: "/in/beats/",
+  AirTag: "/in/airtag/",
+  "Explore Support": "/in/support/",
+  "Helpful Topics": "/in/support/",
+  "Apple Support": "/in/support/",
+  "Repair": "/in/support/repair/",
+  "Contact Apple Support": "/in/support/contact/",
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -340,6 +429,7 @@ function AppleIntelligencePage() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const siteHeaderRef = useRef<HTMLElement>(null);
   const desktopMenuRef = useRef<HTMLDivElement>(null);
   const railRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -355,9 +445,9 @@ function AppleIntelligencePage() {
     const onPointerDown = (event: PointerEvent) => {
       if (
         activeMenu &&
-        desktopMenuRef.current &&
+        siteHeaderRef.current &&
         event.target instanceof Node &&
-        !desktopMenuRef.current.contains(event.target)
+        !siteHeaderRef.current.contains(event.target)
       ) {
         setActiveMenu(null);
       }
@@ -414,7 +504,7 @@ function AppleIntelligencePage() {
   return (
     <div className="apple-page">
       <a className="apple-skip-link" href="#main-content">Skip to content</a>
-      <header className="apple-site-header">
+      <header className="apple-site-header" ref={siteHeaderRef}>
         <nav className="apple-global-nav" aria-label="Apple">
           <a className="apple-wordmark" href="/in/" aria-label="Apple home">Apple</a>
           <div className="apple-desktop-links">
@@ -474,7 +564,7 @@ function AppleIntelligencePage() {
                     <a
                       key={item}
                       className={index === 0 ? "apple-mega-featured" : ""}
-                      href={item === "Apple Intelligence and Siri" ? "/" : primaryLinks.find((entry) => entry.name === activeMenu)?.href ?? "/in/"}
+                      href={menuItemHrefs[item] ?? primaryLinks.find((entry) => entry.name === activeMenu)?.href ?? "/in/"}
                       onClick={() => setActiveMenu(null)}
                     >
                       {item}
