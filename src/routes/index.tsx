@@ -555,7 +555,10 @@ function AppleIntelligencePage() {
                 className={`apple-nav-item${activeMenu === link.name ? " is-open" : ""}`}
                 aria-expanded={activeMenu === link.name}
                 aria-controls="apple-mega-menu"
-                onClick={() => setActiveMenu((current) => current === link.name ? null : link.name)}
+                onClick={(event) => {
+                  activeNavTriggerRef.current = event.currentTarget;
+                  setActiveMenu(link.name);
+                }}
                 onMouseEnter={(event) => {
                   activeNavTriggerRef.current = event.currentTarget;
                   setActiveMenu(link.name);
