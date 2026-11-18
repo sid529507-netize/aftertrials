@@ -506,7 +506,7 @@ function AppleIntelligencePage() {
     if (motionPreference.matches) return;
 
     const revealTargets = document.querySelectorAll<HTMLElement>(
-      ".apple-section-heading, .apple-feature-header, .apple-highlight-feature, .apple-feature-card, .apple-more-item, .apple-privacy-card, .apple-product-card, .apple-compatible-heading, .apple-compatible-column, .apple-developer-card",
+      ".apple-section-heading, .apple-feature-header, .apple-highlight-feature, .apple-feature-card, .apple-feature-card > img, .apple-hero-art img, .apple-more-item, .apple-privacy-card, .apple-product-card, .apple-product-image-link img, .apple-compatible-heading, .apple-compatible-column, .apple-developer-card",
     );
 
     if (!("IntersectionObserver" in window)) {
@@ -522,7 +522,7 @@ function AppleIntelligencePage() {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -36px 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -24px 0px" },
     );
 
     revealTargets.forEach((target) => {
