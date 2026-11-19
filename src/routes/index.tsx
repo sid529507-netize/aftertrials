@@ -540,6 +540,7 @@ function AppleIntelligencePage() {
           target.classList.add("apple-motion-enter-center");
         }
       }
+      if (target.matches(".apple-highlight-feature")) target.classList.add("apple-motion-cinematic");
       if (target.matches(".apple-feature-card")) {
         const cardIndex = Array.from(target.parentElement?.children ?? []).indexOf(target);
         const featured = target.closest(".apple-highlights");
