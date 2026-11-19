@@ -2322,3 +2322,126 @@
   .apple-scroll-zoom,
   .apple-scroll-zoom.apple-scroll-reveal--visible { scale: 1; }
 }
+
+/* Distinct motion language for each story in the page. */
+.apple-hero-art .apple-motion-hero-image {
+  transition: opacity 850ms cubic-bezier(0.2, 0.7, 0.2, 1), translate 1050ms cubic-bezier(0.18, 0.78, 0.22, 1), scale 1100ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-hero-art .apple-motion-enter-left { translate: -76px 22px; scale: 0.9; }
+.apple-hero-art .apple-motion-enter-right { translate: 76px 22px; scale: 0.9; }
+.apple-hero-art .apple-motion-enter-center { translate: 0 48px; scale: 0.82; }
+.apple-hero-art .apple-motion-hero-image.apple-scroll-reveal--visible { translate: 0 0; scale: 1; }
+.apple-hero-art .apple-hero-device.apple-motion-hero-image { transition-delay: 120ms; }
+
+.apple-highlight-feature.apple-motion-cinematic {
+  scale: 0.94;
+  clip-path: inset(4% 3% 4% 3% round 14px);
+  transition: opacity 900ms ease, scale 1100ms cubic-bezier(0.18, 0.78, 0.22, 1), clip-path 1100ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-highlight-feature.apple-motion-cinematic.apple-scroll-reveal--visible {
+  scale: 1;
+  clip-path: inset(0 0 0 0 round 8px);
+}
+
+.apple-feature-card.apple-motion-gallery-card {
+  translate: -48px 14px;
+  transition: opacity 760ms ease, translate 850ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-feature-card.apple-motion-gallery-card.apple-motion-enter-right { translate: 48px 14px; }
+.apple-feature-card.apple-motion-gallery-card.apple-scroll-reveal--visible { translate: 0 0; }
+
+.apple-feature-card.apple-motion-feature-card {
+  translate: 0 42px;
+  scale: 0.96;
+  rotate: -0.7deg;
+  transition: opacity 780ms ease, translate 900ms cubic-bezier(0.18, 0.78, 0.22, 1), scale 900ms cubic-bezier(0.18, 0.78, 0.22, 1), rotate 900ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-feature-card.apple-motion-feature-card:nth-child(even) { rotate: 0.7deg; }
+.apple-feature-card.apple-motion-feature-card.apple-scroll-reveal--visible { translate: 0 0; scale: 1; rotate: 0deg; }
+
+.apple-feature-card > img.apple-scroll-zoom,
+.apple-product-image-link img.apple-scroll-zoom {
+  clip-path: inset(4% round 8px);
+  transition: scale 1050ms cubic-bezier(0.18, 0.78, 0.22, 1), clip-path 1050ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-feature-card > img.apple-scroll-zoom.apple-scroll-reveal--visible,
+.apple-product-image-link img.apple-scroll-zoom.apple-scroll-reveal--visible {
+  clip-path: inset(0 round 8px);
+}
+
+.apple-more-item.apple-motion-stagger {
+  translate: 0 44px;
+  scale: 0.92;
+  transition: opacity 740ms ease, translate 880ms cubic-bezier(0.18, 0.78, 0.22, 1), scale 880ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-more-item.apple-motion-stagger:nth-child(2) { transition-delay: 90ms; }
+.apple-more-item.apple-motion-stagger:nth-child(3) { transition-delay: 180ms; }
+.apple-more-item.apple-motion-stagger:nth-child(4) { transition-delay: 270ms; }
+.apple-more-item.apple-motion-stagger.apple-scroll-reveal--visible { translate: 0 0; scale: 1; }
+
+.apple-product-card.apple-motion-product {
+  translate: 0 36px;
+  scale: 0.97;
+  transition: opacity 720ms ease, translate 850ms cubic-bezier(0.18, 0.78, 0.22, 1), scale 850ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-product-card.apple-motion-product.apple-scroll-reveal--visible { translate: 0 0; scale: 1; }
+
+.apple-privacy-copy.apple-motion-enter-left { translate: -54px 0; }
+.apple-privacy-promise.apple-motion-enter-right { translate: 54px 0; }
+.apple-privacy-copy.apple-motion-enter-left.apple-scroll-reveal--visible,
+.apple-privacy-promise.apple-motion-enter-right.apple-scroll-reveal--visible { translate: 0 0; }
+
+.apple-compatible-column.apple-motion-detail {
+  filter: blur(7px);
+  translate: 0 18px;
+  transition: opacity 650ms ease, filter 800ms ease, translate 800ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-compatible-column.apple-motion-detail.apple-scroll-reveal--visible { filter: blur(0); translate: 0 0; }
+
+.apple-developer-card.apple-motion-developer {
+  scale: 0.96;
+  translate: 0 28px;
+  transition: opacity 780ms ease, scale 950ms cubic-bezier(0.18, 0.78, 0.22, 1), translate 950ms cubic-bezier(0.18, 0.78, 0.22, 1);
+}
+
+.apple-developer-card.apple-motion-developer.apple-scroll-reveal--visible { scale: 1; translate: 0 0; }
+
+@media (max-width: 600px) {
+  .apple-hero-art .apple-motion-enter-left { translate: -30px 12px; }
+  .apple-hero-art .apple-motion-enter-right { translate: 30px 12px; }
+  .apple-feature-card.apple-motion-gallery-card { translate: -24px 8px; }
+  .apple-feature-card.apple-motion-gallery-card.apple-motion-enter-right { translate: 24px 8px; }
+  .apple-privacy-copy.apple-motion-enter-left { translate: -20px 0; }
+  .apple-privacy-promise.apple-motion-enter-right { translate: 20px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apple-motion-hero-image,
+  .apple-highlight-feature.apple-motion-cinematic,
+  .apple-feature-card.apple-motion-gallery-card,
+  .apple-feature-card.apple-motion-feature-card,
+  .apple-more-item.apple-motion-stagger,
+  .apple-product-card.apple-motion-product,
+  .apple-privacy-copy.apple-motion-enter-left,
+  .apple-privacy-promise.apple-motion-enter-right,
+  .apple-compatible-column.apple-motion-detail,
+  .apple-developer-card.apple-motion-developer {
+    opacity: 1;
+    scale: 1;
+    rotate: 0deg;
+    translate: none;
+    filter: none;
+    clip-path: none;
+    transition: none;
+  }
+  .apple-feature-card > img.apple-scroll-zoom,
+  .apple-product-image-link img.apple-scroll-zoom { scale: 1; clip-path: none; transition: none; }
+}
