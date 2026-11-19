@@ -506,7 +506,7 @@ function AppleIntelligencePage() {
     if (motionPreference.matches) return;
 
     const revealTargets = document.querySelectorAll<HTMLElement>(
-      ".apple-section-heading, .apple-feature-header, .apple-highlight-feature, .apple-feature-card, .apple-feature-card > img, .apple-hero-art img, .apple-more-item, .apple-privacy-card, .apple-product-card, .apple-product-image-link img, .apple-compatible-heading, .apple-compatible-column, .apple-developer-card",
+      ".apple-section-heading, .apple-feature-header, .apple-highlight-feature, .apple-feature-card, .apple-feature-card > img, .apple-hero-art img, .apple-hero-summary, .apple-more-item, .apple-privacy-card, .apple-privacy-copy, .apple-privacy-promise, .apple-product-card, .apple-product-image-link img, .apple-compatible-heading, .apple-compatible-column, .apple-developer-card",
     );
 
     if (!("IntersectionObserver" in window)) {
@@ -525,17 +525,34 @@ function AppleIntelligencePage() {
       { threshold: 0.04, rootMargin: "180px 0px 180px 0px" },
     );
 
-    const directionalTargets = ".apple-feature-card, .apple-more-item, .apple-product-card, .apple-compatible-column";
-    const zoomTargets = ".apple-feature-card > img, .apple-hero-art img, .apple-product-image-link img";
-    let directionIndex = 0;
+    const zoomTargets = ".apple-feature-card > img, .apple-product-image-link img";
 
     revealTargets.forEach((target) => {
       target.classList.add("apple-scroll-reveal");
       if (target.matches(zoomTargets)) target.classList.add("apple-scroll-zoom");
-      if (target.matches(directionalTargets)) {
-        target.classList.add(directionIndex % 2 === 0 ? "apple-scroll-reveal--left" : "apple-scroll-reveal--right");
-        directionIndex += 1;
+      if (target.matches(".apple-hero-art img")) {
+        target.classList.add("apple-motion-hero-image");
+        if (target.matches(".apple-hero-side-left, .apple-hero-panel-left")) {
+          target.classList.add("apple-motion-enter-left");
+        } else if (target.matches(".apple-hero-side-right, .apple-hero-panel-right")) {
+          target.classList.add("apple-motion-enter-right");
+        } else {
+          target.classList.add("apple-motion-enter-center");
+        }
       }
+      if (target.matches(".apple-feature-card")) {
+        const cardIndex = Array.from(target.parentElement?.children ?? []).indexOf(target);
+        const featured = target.closest(".apple-highlights");
+        target.classList.add(featured ? "apple-motion-gallery-card" : "apple-motion-feature-card");
+        if (cardIndex % 2 === 0) target.classList.add("apple-motion-enter-left");
+        else target.classList.add("apple-motion-enter-right");
+      }
+      if (target.matches(".apple-more-item")) target.classList.add("apple-motion-stagger");
+      if (target.matches(".apple-product-card")) target.classList.add("apple-motion-product");
+      if (target.matches(".apple-privacy-copy")) target.classList.add("apple-motion-enter-left");
+      if (target.matches(".apple-privacy-promise")) target.classList.add("apple-motion-enter-right");
+      if (target.matches(".apple-compatible-column")) target.classList.add("apple-motion-detail");
+      if (target.matches(".apple-developer-card")) target.classList.add("apple-motion-developer");
       observer.observe(target);
     });
 
